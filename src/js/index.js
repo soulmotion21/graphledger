@@ -1,5 +1,6 @@
 import lib from "./lib";
+import '../css/style.css';
 
-console.log('aaaa');
+console.log('aadb!!');
 
 lib();
