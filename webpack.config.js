@@ -4,13 +4,9 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: 'development',
-  // 가장 처음 읽을 스크립트파일
-  // 여기서부터 import 되어있는 다른 스크립트를 불러온다.
   entry: './src/js/index.js',
-
-  // 파일을 합치고 ./public/bundle.js 에 저장한다.
   output: {
-    path: path.resolve(__dirname, './public'),
+    path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
   },
   devServer: {
@@ -22,7 +18,6 @@ module.exports = {
     poll: 1000,
     ignored: /node_modules/
   },
-  // babel
   module: {
     rules: [
       {
@@ -50,7 +45,7 @@ module.exports = {
        {
          loader: 'css-loader',
          options: {
-
+          modules: true
          }
        }
      ]
@@ -65,8 +60,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: './public/index.html', // public/index.html 파일을 읽는다.
-      filename: 'index.html' // output으로 출력할 파일은 index.html 이다.
+      filename: "index.html",
+      'title': 'Graphledger webapp',
+      'meta': {
+        'viewport': 'width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'
+      }
     }),
     new MiniCssExtractPlugin({
       filename: 'style.css'
