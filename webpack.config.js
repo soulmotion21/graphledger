@@ -1,4 +1,6 @@
 const path = require('path');
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: 'development',
@@ -22,23 +24,52 @@ module.exports = {
   },
   // babel
   module: {
-    rules: [{
-      test: /\.js$/,
-      include: path.resolve(__dirname, './src/js'),
-      exclude: /node_modules/,
-      use: {
-        loader: "babel-loader",
+    rules: [
+      {
+        test: /\.js$/,
+        include: path.resolve(__dirname, './src/js'),
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: [
+              ["@babel/env", {
+                "targets": {
+                  "browsers": ["last 2 versions"]
+                }
+              }]
+            ]
+          }
+        }
+    }, {
+     test: /\.css$/,
+     use: [
+       {
+         loader: MiniCssExtractPlugin.loader
+       },
+       {
+         loader: 'css-loader',
+         options: {
+
+         }
+       }
+     ]
+    }, {
+      test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/i,
+        loader: 'url-loader',
         options: {
-          presets: [
-            ["@babel/env", {
-              "targets": {
-                "browsers": ["last 2 versions"]
-              }
-            }]
-          ]
+        limit: 8192
         }
       }
-    }]
+    ]
   },
-  plugins: []
+  plugins: [
+    new HtmlWebPackPlugin({
+      template: './public/index.html', // public/index.html 파일을 읽는다.
+      filename: 'index.html' // output으로 출력할 파일은 index.html 이다.
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'style.css'
+    })
+  ]
 };

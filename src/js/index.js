@@ -1,5 +1,8 @@
-import lib from "./lib";
+import '../css/style.css';
+import math from "../components/math/math";
+import form from '../components/form/form';
 
-console.log('aaaa');
+console.log('init project!!');
 
-lib();
+math();
+form();
