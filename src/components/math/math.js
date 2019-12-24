@@ -6,4 +6,7 @@ export default function () {
   function bbb(x, y) {
     return x + y;
   }
+
+  console.log('load math');
+
 }
