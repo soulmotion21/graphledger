@@ -2,12 +2,24 @@ const path = require('path');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
+
+
+
 module.exports = {
   mode: 'development',
-  entry: './src/js/index.js',
+  entry: {
+    index: './src/js/index.js',
+    vendor: ['d3', 'moment']
+  },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: '[name].js'
+  },
+  optimization: {
+    splitChunks: {
+      name: 'vendor',
+      chunks: 'initial'
+    }
   },
   devServer: {
     contentBase: './public'
