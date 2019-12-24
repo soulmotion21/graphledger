@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --hot",
-    "clean": "rm -rf build public/bundle.js",
+    "clean": "rm -rf public/*",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "start": "NODE_ENV=production node ./build/main.js",
